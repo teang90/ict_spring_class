@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.mybatis.example.BlogMapper">
+	
+	<select id="list" resultType="com.ict.mybatis.VO">
+		select * from member order by id
+	</select>
+	
+	<insert id="insert" parameterType="com.ict.mybatis.VO">
+		insert into member values(memebers_seq.nextval,#{age},#{name},#{id},#{pw},#{addr},sysdate)
+	</insert>
+	
+	<select id="onelist" parameterType="String" resultType="com.ict.mybatis.VO">
+		select * from member where id=#{id}
+	</select>
+	
+	<delete id="delete" parameterType="String">
+		delete from member where id=#{id}
+	</delete>
+	
+	<update id="update" parameterType="com.ict.mybatis.VO">
+		update member set age=#{age}, name=#{name}, addr=#{addr} where id=#{id}
+	</update>
+	
+</mapper>
+
+
