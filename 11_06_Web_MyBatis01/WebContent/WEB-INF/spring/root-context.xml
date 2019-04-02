@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 오라클 연결 정보 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">	
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+		<property name="username" value="nohsam" />
+		<property name="password" value="1111" />
+	</bean>
+	
+	<!-- mybatis의 config -->
+	<bean id="factoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations" value="classpath*:com/ict/mybatis/mapper.xml" />
+	</bean>
+	
+	<!-- java에서 사용하기 위해 호출한 SqlSessionTemplate클래스 -->
+	<bean id="template" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="factoryBean"/>
+	</bean>
+	
+	<!-- DAO 클래스 -->
+	<bean id="dao" class="com.ict.mybatis.DAO">
+		<property name="template"  ref="template" />
+	</bean>
+</beans>
+
+
+
+
+
+
+
+

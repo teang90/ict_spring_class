@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.mybatis.example.BlogMapper">
+	
+	<select id="list" resultType="com.ict.mybatis.VO">
+		select * from guestbook order by idx desc
+	</select>
+	
+	<select id="onelist" parameterType="String" resultType="com.ict.mybatis.VO">
+		select * from guestbook where idx = #{idx}
+	</select>
+	
+	<insert id="insert" parameterType="com.ict.mybatis.VO">
+		insert into guestbook values(guestbook_seq.nextval,#{name},#{subject},#{content},#{email},#{pwd},sysdate)
+	</insert>	
+	
+	<update id="update" parameterType="com.ict.mybatis.VO">
+		update guestbook set name=#{name}, subject=#{subject}, content=#{content}, email=#{email} where idx=#{idx} and pwd=#{pwd}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		delete from guestbook where idx = #{idx}
+	</delete>
+</mapper>
+
+
+
+
+
